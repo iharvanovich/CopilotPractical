@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TrainingTracker.Infrastructure.Persistence;
+using TrainingTracker.Infrastructure.Repositories;
+using TrainingTracker.Application.Interfaces;
+using TrainingTracker.Infrastructure.Services;
 
 namespace TrainingTracker.Infrastructure.Extensions;
 
@@ -21,6 +24,22 @@ public static class ServiceCollectionExtensions
             options.UseSqlite(connectionString);
         });
 
+        // Register generic repository
+        services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+
+        // Database initializer
+        services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
+
         return services;
+    }
+
+    /// <summary>
+    /// Run database initialization (migrations + seeding). Intended to be called at application startup.
+    /// </summary>
+    public static async Task InitializeDatabaseAsync(this IServiceProvider services, CancellationToken cancellationToken = default)
+    {
+        using var scope = services.CreateScope();
+        var initializer = scope.ServiceProvider.GetRequiredService<IDatabaseInitializer>();
+        await initializer.InitializeAsync(cancellationToken);
     }
 }

@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TrainingTracker.Domain\TrainingTracker.Domain.csproj" />
+    <ProjectReference Include="..\TrainingTracker.Application\TrainingTracker.Application.csproj" />
   </ItemGroup>
 
 </Project>

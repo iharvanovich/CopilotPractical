@@ -13,7 +13,7 @@ builder.Services.AddOpenApi();
 var app = builder.Build();
 
 // Ensure database is migrated and seeded
-await app.MigrateAndSeedAsync();
+await app.Services.InitializeDatabaseAsync();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
