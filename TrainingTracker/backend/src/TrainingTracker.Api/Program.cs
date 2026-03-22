@@ -1,10 +1,13 @@
+using TrainingTracker.Application.Extensions;
 using TrainingTracker.Infrastructure.Extensions;
-using TrainingTracker.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Register persistence (DbContext) using extension from Infrastructure
 builder.Services.AddPersistence(builder.Configuration);
+
+// Register application services
+builder.Services.AddApplicationServices();
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
