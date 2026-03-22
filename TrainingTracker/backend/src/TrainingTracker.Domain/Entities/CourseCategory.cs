@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TrainingTracker.Domain.Entities;
 
-public class CourseCategory : BaseEntity
+public class CourseCategory : AuditableEntity
 {
     [Required]
     [MaxLength(200)]

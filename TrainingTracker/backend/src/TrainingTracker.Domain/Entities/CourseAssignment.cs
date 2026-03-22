@@ -4,7 +4,7 @@ using TrainingTracker.Domain.Enums;
 
 namespace TrainingTracker.Domain.Entities;
 
-public class CourseAssignment : BaseEntity
+public class CourseAssignment : AuditableEntity
 {
     // Foreign keys
     public Guid EmployeeId { get; set; }

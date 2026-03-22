@@ -4,7 +4,7 @@ using TrainingTracker.Domain.Entities;
 
 namespace TrainingTracker.Domain.Entities;
 
-public class Employee : BaseEntity
+public class Employee : AuditableEntity
 {
     [Required]
     [MaxLength(100)]
