@@ -3,11 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrainingTracker.Domain.Entities;
 
-public class Course
+public class Course : BaseEntity
 {
-    [Key]
-    public Guid Id { get; set; } = Guid.NewGuid();
-
     [Required]
     [MaxLength(300)]
     public string Title { get; set; } = null!;

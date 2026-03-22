@@ -2,11 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TrainingTracker.Domain.Entities;
 
-public class CourseCategory
+public class CourseCategory : BaseEntity
 {
-    [Key]
-    public Guid Id { get; set; } = Guid.NewGuid();
-
     [Required]
     [MaxLength(200)]
     public string Name { get; set; } = null!;

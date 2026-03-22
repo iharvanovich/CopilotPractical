@@ -4,11 +4,8 @@ using TrainingTracker.Domain.Entities;
 
 namespace TrainingTracker.Domain.Entities;
 
-public class Employee
+public class Employee : BaseEntity
 {
-    [Key]
-    public Guid Id { get; set; } = Guid.NewGuid();
-
     [Required]
     [MaxLength(100)]
     public string FirstName { get; set; } = null!;
