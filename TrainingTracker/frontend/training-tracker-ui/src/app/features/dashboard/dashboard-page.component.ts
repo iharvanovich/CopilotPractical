@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { finalize } from 'rxjs';
 import { DashboardApiService } from '../../core/services/api';
 import { DashboardSummary } from '../../shared/models/dashboard-summary';
 
 @Component({
   selector: 'app-dashboard-page',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatProgressBarModule, MatGridListModule],
+  imports: [CommonModule, MatCardModule, MatProgressBarModule],
   templateUrl: './dashboard-page.component.html',
   styleUrl: './dashboard-page.component.scss'
 })
@@ -25,17 +25,22 @@ export class DashboardPageComponent implements OnInit {
   }
 
   private loadSummary(): void {
-    this.dashboardApi.getSummary().subscribe({
-      next: (data) => {
-        this.summary = data;
-        this.loading = false;
-      },
-      error: (err: any) => {
-        this.error = 'Failed to load dashboard summary';
-        this.loading = false;
-        console.error(err);
-      }
-    });
+    this.loading = true;
+    this.error = null;
+
+    this.dashboardApi
+      .getSummary()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe({
+        next: (data) => {
+          this.summary = data;
+        },
+        error: (err: any) => {
+          this.summary = null;
+          this.error = 'Failed to load dashboard summary';
+          console.error(err);
+        }
+      });
   }
 
   getCompletionPercentage(): number {
