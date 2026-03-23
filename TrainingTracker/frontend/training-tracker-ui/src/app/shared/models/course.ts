@@ -19,6 +19,6 @@ export interface UpdateCourse extends CreateCourse {
 }
 
 export interface CourseCategory {
-  id: string;
+  id?: string;
   name: string;
 }

@@ -47,32 +47,48 @@
   }
 }
 
-.status-pending {
-  background-color: #e3f2fd;
-  color: #1565c0;
+.status-chip-set {
+  display: inline-flex;
 }
 
-.status-assigned {
-  background-color: #fff3e0;
-  color: #e65100;
+.status-chip.mat-mdc-chip {
+  --mdc-chip-container-height: 32px;
+  --mdc-chip-label-text-size: 0.84rem;
+  --mdc-chip-label-text-weight: 700;
+  --mdc-chip-outline-width: 0;
+  border-radius: 999px;
 }
 
-.status-in-progress {
-  background-color: #e8f5e9;
-  color: #2e7d32;
+.status-chip .mdc-evolution-chip__text-label {
+  color: inherit;
 }
 
-.status-completed {
-  background-color: #f3e5f5;
-  color: #6a1b9a;
+.status-chip.status-pending.mat-mdc-chip {
+  background: #eef4ff;
+  color: #2459a6;
 }
 
-.status-overdue {
-  background-color: #ffebee;
-  color: #c62828;
+.status-chip.status-assigned.mat-mdc-chip {
+  background: #fff1dd;
+  color: #b96a10;
 }
 
-.status-cancelled {
-  background-color: #f5f5f5;
-  color: #616161;
+.status-chip.status-in-progress.mat-mdc-chip {
+  background: #e8f5ff;
+  color: #0f6aa8;
+}
+
+.status-chip.status-completed.mat-mdc-chip {
+  background: #e7f8ee;
+  color: #1f7a46;
+}
+
+.status-chip.status-overdue.mat-mdc-chip {
+  background: #ffe8e8;
+  color: #bf2f45;
+}
+
+.status-chip.status-cancelled.mat-mdc-chip {
+  background: #eef1f4;
+  color: #5d6875;
 }

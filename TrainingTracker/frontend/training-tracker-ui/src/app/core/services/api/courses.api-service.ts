@@ -30,6 +30,18 @@ export class CoursesApiService {
   }
 
   getCategories(): Observable<CourseCategory[]> {
-    return this.httpClient.get<CourseCategory[]>('course-categories');
+    return this.httpClient.get<CourseCategory[]>('coursecategories');
+  }
+
+  createCategory(category: CourseCategory): Observable<CourseCategory> {
+    return this.httpClient.post<CourseCategory>('coursecategories', category);
+  }
+
+  updateCategory(category: CourseCategory): Observable<void> {
+    return this.httpClient.put<void>(`coursecategories/${category.id}`, category);
+  }
+
+  deleteCategory(id: string): Observable<void> {
+    return this.httpClient.delete(`coursecategories/${id}`);
   }
 }

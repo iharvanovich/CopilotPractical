@@ -9,7 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EmployeesApiService } from '../../core/services/api';
-import { Employee } from '../../shared/models/employee';
+import { CreateEmployee, UpdateEmployee } from '../../shared/models/employee';
 
 @Component({
   selector: 'app-employee-detail-page',
@@ -72,17 +72,20 @@ export class EmployeeDetailPageComponent implements OnInit {
   save(): void {
     if (!this.form.valid) return;
     this.saving = true;
+    this.error = null;
 
-    const employee: Employee = {
-      id: this.employeeId || '',
+    const employeeData: CreateEmployee = {
       ...this.form.value
     };
 
     const request$ = this.employeeId && this.employeeId !== 'new'
-      ? this.employeesApi.update(employee) as any
-      : this.employeesApi.create(employee) as any;
+      ? this.employeesApi.update({
+          id: this.employeeId,
+          ...employeeData
+        } satisfies UpdateEmployee)
+      : this.employeesApi.create(employeeData);
 
-    request$.subscribe({
+    (request$ as any).subscribe({
       next: () => {
         this.router.navigate(['/employees']);
       },

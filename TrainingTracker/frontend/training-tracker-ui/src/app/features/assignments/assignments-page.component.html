@@ -38,8 +38,8 @@
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef>Status</th>
       <td mat-cell *matCellDef="let element">
-        <mat-chip-set>
-          <mat-chip [ngClass]="getStatusClass(element.status)">
+        <mat-chip-set class="status-chip-set">
+          <mat-chip class="status-chip" [ngClass]="getStatusClass(element.status)">
             {{ getStatusLabel(element.status) }}
           </mat-chip>
         </mat-chip-set>
@@ -49,10 +49,20 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let element">
-        <a mat-icon-button [routerLink]="['/assignments', element.id]" matTooltip="Edit">
+        <a
+          mat-icon-button
+          class="action-button action-button-edit"
+          [routerLink]="['/assignments', element.id]"
+          matTooltip="Edit"
+        >
           <mat-icon>edit</mat-icon>
         </a>
-        <button mat-icon-button (click)="deleteAssignment(element.id)" matTooltip="Delete">
+        <button
+          mat-icon-button
+          class="action-button action-button-delete"
+          (click)="deleteAssignment(element.id)"
+          matTooltip="Delete"
+        >
           <mat-icon>delete</mat-icon>
         </button>
       </td>

@@ -140,3 +140,32 @@ mat-list-item {
   color: var(--text-secondary);
 }
 
+.action-button {
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.action-button:hover {
+  transform: translateY(-1px);
+}
+
+.action-button-edit {
+  color: #1f5f99;
+  background: rgba(31, 95, 153, 0.1);
+}
+
+.action-button-edit:hover {
+  background: rgba(31, 95, 153, 0.16);
+}
+
+.action-button-delete {
+  color: #bf2f45;
+  background: rgba(191, 47, 69, 0.1);
+}
+
+.action-button-delete:hover {
+  background: rgba(191, 47, 69, 0.16);
+}
+

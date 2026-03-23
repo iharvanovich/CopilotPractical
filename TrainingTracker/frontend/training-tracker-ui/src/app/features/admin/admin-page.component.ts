@@ -8,6 +8,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { finalize } from 'rxjs';
 import { CoursesApiService } from '../../core/services/api';
 import { CourseCategory } from '../../shared/models/course';
 
@@ -51,6 +52,9 @@ export class AdminPageComponent implements OnInit {
   }
 
   private loadCategories(): void {
+    this.loading = true;
+    this.error = null;
+
     this.coursesApi.getCategories().subscribe({
       next: (data) => {
         this.categories = data;
@@ -66,32 +70,56 @@ export class AdminPageComponent implements OnInit {
 
   saveCategory(): void {
     if (!this.form.valid) return;
-    this.saving = true;
 
-    // Note: This is a placeholder. Implement actual create/update endpoints in the backend if needed.
-    // For now, we'll just add it locally to demonstrate the UI.
+    this.saving = true;
+    this.error = null;
+
     const category: CourseCategory = {
-      id: this.editingId || new Date().getTime().toString(),
-      name: this.form.value.name
+      id: this.editingId || undefined,
+      name: this.form.value.name?.trim()
     };
 
     if (this.editingId) {
-      const index = this.categories.findIndex(c => c.id === this.editingId);
-      if (index >= 0) {
-        this.categories[index] = category;
-      }
-    } else {
-      this.categories.push(category);
-    }
+      this.coursesApi
+        .updateCategory(category)
+        .pipe(finalize(() => (this.saving = false)))
+        .subscribe({
+          next: () => {
+            const index = this.categories.findIndex(c => c.id === this.editingId);
+            if (index >= 0) {
+              this.categories[index] = { ...this.categories[index], ...category };
+              this.categories = [...this.categories];
+            }
 
-    this.form.reset();
-    this.editingId = null;
-    this.saving = false;
+            this.form.reset();
+            this.editingId = null;
+          },
+          error: (err: any) => {
+            this.error = 'Failed to save category';
+            console.error(err);
+          }
+        });
+    } else {
+      this.coursesApi
+        .createCategory(category)
+        .pipe(finalize(() => (this.saving = false)))
+        .subscribe({
+          next: (createdCategory) => {
+            this.categories = [...this.categories, createdCategory];
+            this.form.reset();
+            this.editingId = null;
+          },
+          error: (err: any) => {
+            this.error = 'Failed to save category';
+            console.error(err);
+          }
+        });
+    }
   }
 
   editCategory(category: CourseCategory): void {
     this.form.patchValue({ name: category.name });
-    this.editingId = category.id;
+    this.editingId = category.id || null;
   }
 
   deleteCategory(id: string): void {
