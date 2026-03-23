@@ -1,0 +1,48 @@
+.courses-container {
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.loading {
+  margin: 24px 0;
+}
+
+.error-message {
+  padding: 16px;
+  background-color: #ffebee;
+  color: #c62828;
+  border-radius: 4px;
+  margin: 16px 0;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px 16px;
+  color: #666;
+}
+
+.courses-table {
+  width: 100%;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+  }
+
+  tr:hover {
+    background-color: #fafafa;
+  }
+}

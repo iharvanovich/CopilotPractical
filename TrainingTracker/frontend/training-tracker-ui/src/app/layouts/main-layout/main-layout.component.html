@@ -1,0 +1,67 @@
+<mat-toolbar color="primary" class="main-toolbar">
+  <button
+    mat-icon-button
+    class="menu-toggle"
+    (click)="sidenav.toggle()"
+    aria-label="Toggle sidenav"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="app-title">Training Tracker</span>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #sidenav
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="'navigation'"
+    aria-label="Side navigation"
+  >
+    <mat-nav-list>
+      <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/dashboard" (click)="sidenav.close()">
+          <mat-icon>dashboard</mat-icon>
+          <span>Dashboard</span>
+        </a>
+      </mat-list-item>
+      <mat-list-item routerLinkActive="active">
+        <a routerLink="/employees" (click)="sidenav.close()">
+          <mat-icon>group</mat-icon>
+          <span>Employees</span>
+        </a>
+      </mat-list-item>
+      <mat-list-item routerLinkActive="active">
+        <a routerLink="/courses" (click)="sidenav.close()">
+          <mat-icon>school</mat-icon>
+          <span>Courses</span>
+        </a>
+      </mat-list-item>
+      <mat-list-item routerLinkActive="active">
+        <a routerLink="/assignments" (click)="sidenav.close()">
+          <mat-icon>assignment</mat-icon>
+          <span>Assignments</span>
+        </a>
+      </mat-list-item>
+      <mat-list-item routerLinkActive="active">
+        <a routerLink="/overdue" (click)="sidenav.close()">
+          <mat-icon>warning</mat-icon>
+          <span>Overdue</span>
+        </a>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item routerLinkActive="active">
+        <a routerLink="/admin" (click)="sidenav.close()">
+          <mat-icon>settings</mat-icon>
+          <span>Admin</span>
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="sidenav-content">
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

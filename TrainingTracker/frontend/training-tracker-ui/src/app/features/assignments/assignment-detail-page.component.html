@@ -1,0 +1,131 @@
+<div class="assignment-detail-container">
+  <div *ngIf="!assignment">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>New Assignment</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div *ngIf="loading" class="loading">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+
+        <div *ngIf="error" class="error-message">
+          {{ error }}
+        </div>
+
+        <form [formGroup]="form" class="assignment-form">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Employee</mat-label>
+            <mat-select formControlName="employeeId" required>
+              <mat-option *ngFor="let employee of employees" [value]="employee.id">
+                {{ employee.fullName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Course</mat-label>
+            <mat-select formControlName="courseId" required>
+              <mat-option *ngFor="let course of courses" [value]="course.id">
+                {{ course.title }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Due Date</mat-label>
+            <input matInput [matDatepicker]="dueAtPicker" formControlName="dueAt" />
+            <mat-datepicker-toggle matIconSuffix [for]="dueAtPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dueAtPicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Notes</mat-label>
+            <textarea matInput formControlName="notes" rows="4"></textarea>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="save()" [disabled]="!form.valid || saving">
+          Save
+        </button>
+        <button mat-button (click)="cancel()">Cancel</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div *ngIf="assignment">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ assignment.employeeName }} - {{ assignment.courseTitle }}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="assignment-info">
+          <div class="info-item">
+            <span class="label">Employee:</span>
+            <span class="value">{{ assignment.employeeName }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Course:</span>
+            <span class="value">{{ assignment.courseTitle }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Assigned At:</span>
+            <span class="value">{{ assignment.assignedAt | date: 'short' }}</span>
+          </div>
+          <div class="info-item" *ngIf="assignment.dueAt">
+            <span class="label">Due At:</span>
+            <span class="value">{{ assignment.dueAt | date: 'short' }}</span>
+          </div>
+          <div class="info-item" *ngIf="assignment.completedAt">
+            <span class="label">Completed At:</span>
+            <span class="value">{{ assignment.completedAt | date: 'short' }}</span>
+          </div>
+          <div class="info-item" *ngIf="assignment.notes">
+            <span class="label">Notes:</span>
+            <span class="value">{{ assignment.notes }}</span>
+          </div>
+        </div>
+
+        <h3 class="section-title">Update Status</h3>
+
+        <div *ngIf="error" class="error-message">
+          {{ error }}
+        </div>
+
+        <form [formGroup]="statusForm" class="status-form">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status" required>
+              <mat-option *ngFor="let status of assignmentStatuses" [value]="status">
+                {{ getStatusLabel(status) }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Completed Date</mat-label>
+            <input matInput [matDatepicker]="completedAtPicker" formControlName="completedAt" />
+            <mat-datepicker-toggle matIconSuffix [for]="completedAtPicker"></mat-datepicker-toggle>
+            <mat-datepicker #completedAtPicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Notes</mat-label>
+            <textarea matInput formControlName="notes" rows="4"></textarea>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="updateStatus()" [disabled]="!statusForm.valid || saving">
+          Update Status
+        </button>
+        <button mat-button (click)="cancel()">Cancel</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

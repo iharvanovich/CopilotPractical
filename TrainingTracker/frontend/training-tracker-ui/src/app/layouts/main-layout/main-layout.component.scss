@@ -1,0 +1,41 @@
+.main-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-title {
+  margin-left: 16px;
+  font-weight: 500;
+}
+
+.sidenav-container {
+  height: calc(100vh - 64px);
+}
+
+.sidenav {
+  width: 250px;
+}
+
+.sidenav-content {
+  padding: 16px;
+}
+
+.content-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+mat-list-item a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+mat-list-item.active {
+  background-color: rgba(0, 0, 0, 0.04);
+}

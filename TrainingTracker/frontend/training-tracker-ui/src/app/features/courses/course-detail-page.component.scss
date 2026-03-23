@@ -1,0 +1,38 @@
+.course-detail-container {
+  padding: 16px;
+  max-width: 600px;
+}
+
+mat-card {
+  margin-bottom: 16px;
+}
+
+.loading {
+  margin: 16px 0;
+}
+
+.error-message {
+  padding: 16px;
+  background-color: #ffebee;
+  color: #c62828;
+  border-radius: 4px;
+  margin: 16px 0;
+}
+
+.course-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-card-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding: 16px;
+  border-top: 1px solid #e0e0e0;
+}

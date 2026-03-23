@@ -1,0 +1,40 @@
+<div class="employee-detail-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ employeeId && employeeId !== 'new' ? 'Edit Employee' : 'New Employee' }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div *ngIf="loading" class="loading">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+
+      <div *ngIf="error" class="error-message">
+        {{ error }}
+      </div>
+
+      <form [formGroup]="form" class="employee-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Full Name</mat-label>
+          <input matInput formControlName="fullName" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="save()" [disabled]="!form.valid || saving">
+        <span *ngIf="!saving">Save</span>
+        <span *ngIf="saving">
+          <mat-progress-spinner diameter="24" mode="indeterminate"></mat-progress-spinner>
+          Saving...
+        </span>
+      </button>
+      <button mat-button (click)="cancel()">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

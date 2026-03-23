@@ -9,6 +9,17 @@ builder.Services.AddPersistence(builder.Configuration);
 // Register application services
 builder.Services.AddApplicationServices();
 
+// Configure CORS - simple default policy for development/course project
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DefaultCors", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddControllers();
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -26,6 +37,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Enable CORS
+app.UseCors("DefaultCors");
+
 app.MapControllers();
 
 app.Run();
