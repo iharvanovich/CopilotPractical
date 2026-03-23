@@ -22,10 +22,11 @@ public class CourseAssignmentService : ICourseAssignmentService
     {
         var assignments = await _repo.GetAllAsync(cancellationToken, nameof(CourseAssignment.Employee), nameof(CourseAssignment.Course));
 
-        // Detect overdue status in memory
+        // Detect overdue status in memory, treating null as Assigned
         foreach (var a in assignments)
         {
-            if (a.Status != AssignmentStatus.Completed && a.DueAt.HasValue && a.DueAt.Value < DateTime.UtcNow)
+            var currentStatus = a.Status ?? AssignmentStatus.Assigned;
+            if (currentStatus != AssignmentStatus.Completed && a.DueAt.HasValue && a.DueAt.Value < DateTime.UtcNow)
             {
                 a.Status = AssignmentStatus.Overdue;
             }
@@ -41,7 +42,7 @@ public class CourseAssignmentService : ICourseAssignmentService
             AssignedAt = a.AssignedAt,
             DueAt = a.DueAt,
             CompletedAt = a.CompletedAt,
-            Status = a.Status,
+            Status = a.Status ?? AssignmentStatus.Assigned,
             Notes = a.Notes
         });
     }
@@ -51,7 +52,8 @@ public class CourseAssignmentService : ICourseAssignmentService
         var a = await _repo.GetByIdAsync(id, cancellationToken, nameof(CourseAssignment.Employee), nameof(CourseAssignment.Course));
         if (a == null) return null;
 
-        if (a.Status != AssignmentStatus.Completed && a.DueAt.HasValue && a.DueAt.Value < DateTime.UtcNow)
+        var currentStatus = a.Status ?? AssignmentStatus.Assigned;
+        if (currentStatus != AssignmentStatus.Completed && a.DueAt.HasValue && a.DueAt.Value < DateTime.UtcNow)
         {
             a.Status = AssignmentStatus.Overdue;
             await _repo.UpdateAsync(a, cancellationToken);
@@ -68,7 +70,7 @@ public class CourseAssignmentService : ICourseAssignmentService
             AssignedAt = a.AssignedAt,
             DueAt = a.DueAt,
             CompletedAt = a.CompletedAt,
-            Status = a.Status,
+            Status = a.Status ?? AssignmentStatus.Assigned,
             Notes = a.Notes
         };
     }
@@ -105,7 +107,7 @@ public class CourseAssignmentService : ICourseAssignmentService
             AssignedAt = created.AssignedAt,
             DueAt = created.DueAt,
             CompletedAt = created.CompletedAt,
-            Status = created.Status,
+            Status = created.Status ?? AssignmentStatus.Assigned,
             Notes = created.Notes
         };
     }

@@ -25,22 +25,28 @@ public class DashboardService : IDashboardService
         var courses = await _courseRepo.GetAllAsync(cancellationToken);
         var assignments = await _assignmentRepo.GetAllAsync(cancellationToken);
 
-        // Detect overdue in-memory
+        // Detect overdue in-memory, treat null as Assigned
         foreach (var a in assignments)
         {
-            if (a.Status != AssignmentStatus.Completed && a.DueAt.HasValue && a.DueAt.Value < DateTime.UtcNow)
+            var status = a.Status ?? AssignmentStatus.Assigned;
+            if (status != AssignmentStatus.Completed && a.DueAt.HasValue && a.DueAt.Value < DateTime.UtcNow)
                 a.Status = AssignmentStatus.Overdue;
         }
+
+        int assignedCount = assignments.Count(a => (a.Status ?? AssignmentStatus.Assigned) == AssignmentStatus.Assigned);
+        int inProgressCount = assignments.Count(a => (a.Status ?? AssignmentStatus.InProgress) == AssignmentStatus.InProgress);
+        int completedCount = assignments.Count(a => (a.Status ?? AssignmentStatus.Completed) == AssignmentStatus.Completed);
+        int overdueCount = assignments.Count(a => (a.Status ?? AssignmentStatus.Overdue) == AssignmentStatus.Overdue);
 
         return new DashboardSummaryModel
         {
             TotalEmployees = employees.Count,
             TotalCourses = courses.Count,
             TotalAssignments = assignments.Count,
-            AssignedCount = assignments.Count(a => a.Status == AssignmentStatus.Assigned),
-            InProgressCount = assignments.Count(a => a.Status == AssignmentStatus.InProgress),
-            CompletedCount = assignments.Count(a => a.Status == AssignmentStatus.Completed),
-            OverdueCount = assignments.Count(a => a.Status == AssignmentStatus.Overdue)
+            AssignedCount = assignedCount,
+            InProgressCount = inProgressCount,
+            CompletedCount = completedCount,
+            OverdueCount = overdueCount
         };
     }
 }

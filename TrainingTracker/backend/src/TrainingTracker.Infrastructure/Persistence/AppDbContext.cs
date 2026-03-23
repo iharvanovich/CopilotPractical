@@ -87,8 +87,7 @@ public class AppDbContext : DbContext
 
             entity.Property(ca => ca.Status)
                   .HasConversion<int>()
-                  .IsRequired()
-                  .HasDefaultValue(TrainingTracker.Domain.Enums.AssignmentStatus.Assigned);
+                  .IsRequired(false);
 
             entity.HasIndex(ca => new { ca.EmployeeId, ca.CourseId });
         });

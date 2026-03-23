@@ -18,7 +18,8 @@ public class CourseAssignment : AuditableEntity
     public DateTime? DueAt { get; set; }
     public DateTime? CompletedAt { get; set; }
 
-    public AssignmentStatus Status { get; set; } = AssignmentStatus.Assigned;
+    // Nullable to allow using database defaults and avoid sentinel warnings
+    public AssignmentStatus? Status { get; set; }
 
     [MaxLength(1000)]
     public string? Notes { get; set; }
