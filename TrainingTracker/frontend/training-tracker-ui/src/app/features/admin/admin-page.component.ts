@@ -117,14 +117,28 @@ export class AdminPageComponent implements OnInit {
     }
   }
 
-  editCategory(category: CourseCategory): void {
-    this.form.patchValue({ name: category.name });
-    this.editingId = category.id || null;
-  }
-
   deleteCategory(id: string): void {
     if (!confirm('Are you sure you want to delete this category?')) return;
-    this.categories = this.categories.filter(c => c.id !== id);
+
+    this.saving = true;
+    this.error = null;
+
+    this.coursesApi
+      .deleteCategory(id)
+      .pipe(finalize(() => (this.saving = false)))
+      .subscribe({
+        next: () => {
+          this.categories = this.categories.filter((c) => c.id !== id);
+          // If we were editing the deleted category, reset the form
+          if (this.editingId === id) {
+            this.cancel();
+          }
+        },
+        error: (err: any) => {
+          this.error = 'Failed to delete category';
+          console.error(err);
+        }
+      });
   }
 
   cancel(): void {

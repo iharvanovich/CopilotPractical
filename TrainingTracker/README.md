@@ -159,6 +159,8 @@ I first tried without "naming conventions", and the agent generated very bad cod
     8.1. update all pages when we use this icons
     8.2 please use approach globally as in admin page
 
+9. fix #sym:deleteCategory using api call
+
 ### What worked well
 - Asking for architecture first
 - Generating one feature at a time
