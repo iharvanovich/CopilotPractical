@@ -169,3 +169,51 @@ mat-list-item {
   background: rgba(191, 47, 69, 0.16);
 }
 
+/* Ensure mat-icon inherits the intended colors globally (same approach as admin page) */
+.action-button-edit mat-icon {
+  color: #1976d2; /* blue */
+}
+
+.action-button-delete mat-icon {
+  color: #d32f2f; /* red */
+}
+
+/* Hover/focus icon color adjustments */
+.action-button-edit:hover mat-icon,
+.action-button-edit:focus-visible mat-icon {
+  color: #0d47a1; /* darker blue on hover/focus */
+}
+
+.action-button-delete:hover mat-icon,
+.action-button-delete:focus-visible mat-icon {
+  color: #b71c1c; /* darker red on hover/focus */
+}
+
+/* Enhanced interaction states for accessibility and feedback */
+.action-button-edit:focus-visible,
+.action-button-delete:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 4px rgba(31,95,153,0.08);
+  border-radius: 6px;
+}
+
+.action-button-delete:focus-visible {
+  box-shadow: 0 0 0 4px rgba(191,47,69,0.08);
+}
+
+.action-button-edit:hover mat-icon,
+.action-button-edit:focus-visible mat-icon {
+  color: #0d47a1; /* darker blue on hover/focus */
+}
+
+.action-button-delete:hover mat-icon,
+.action-button-delete:focus-visible mat-icon {
+  color: #b71c1c; /* darker red on hover/focus */
+}
+
+.action-button-edit:active,
+.action-button-delete:active {
+  transform: translateY(0);
+  opacity: 0.95;
+}
+
