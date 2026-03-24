@@ -187,7 +187,7 @@ The application uses lazy loading for better performance:
 
 ## API Configuration
 
-The HTTP client service uses `http://localhost:5000/api` as the base URL. Update this in `core/services/api/http-client.service.ts` if your backend API is running on a different address.
+The HTTP client service uses `https://localhost:7089/api` as the base URL. Update this in `core/services/api/http-client.service.ts` if your backend API is running on a different address.
 
 ## Getting Started
 

@@ -173,3 +173,15 @@ I first tried without "naming conventions", and the agent generated very bad cod
 ### Prompting Patterns That Worked Best
 - Architecture first, implementation second
 - Backend and frontend generated in separate steps
+
+## How to Run
+### Backend
+1. Open the solution
+2. Set `TrainingTracker.Api` as startup project
+3. Start the API
+
+### Frontend
+1. Open the Angular project
+2. Run `npm install`
+3. Run `ng start`
+4. Open the Angular app in the browser  http://localhost:4200/
