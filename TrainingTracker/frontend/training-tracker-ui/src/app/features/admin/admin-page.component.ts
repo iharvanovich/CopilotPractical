@@ -117,6 +117,11 @@ export class AdminPageComponent implements OnInit {
     }
   }
 
+  editCategory(category: CourseCategory): void {
+    this.form.patchValue({ name: category.name });
+    this.editingId = category.id || null;
+  }
+
   deleteCategory(id: string): void {
     if (!confirm('Are you sure you want to delete this category?')) return;
 
