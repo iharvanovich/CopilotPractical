@@ -105,6 +105,12 @@ Requirements:
 12. create database migration
 13. remove database migration
 14. make tis field public AssignmentStatus Status { get; set; } nullable and fix usages
+15. enable CORS 
+16. Generate backend unit tests for the TrainingTracker solution.
+Focus on: Services
+Requirements: use xUnit
+    unit tests was generated only for EmployeService
+    16.1. Generate backend unit tests for the /services from application
 
 -----------------------------------------------------------------------------------------------------
     frontend
@@ -149,6 +155,9 @@ Use domain names consistently:
 5. please implement saveCategory for use real backend
 6. fix save employee but in current implementation we send id=new its incorrect
 7. make colors for statuses in page Assignments
+8. change color for "edit" icons on blue and "delete" icons on red (agent implemented only for one page - admin)
+    8.1. update all pages when we use this icons
+    8.2 please use approach globally as in admin page
 
 ### What worked well
 - Asking for architecture first
