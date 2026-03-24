@@ -41,45 +41,45 @@ Backend projects:
 - make entities suitable for EF Core
 
 2. Generate the EF Core infrastructure in the TrainingTracker.Infrastructure project.
-Create:
+    - Create:
 - AppDbContext
 - DbSet properties for Employee, Course, CourseCategory, and CourseAssignment
-Requirements:
+    - Requirements:
 - use SQLite
 
 3. Generate seed data logic in TrainingTracker.Infrastructure.
-Create realistic seed data for:
+    - Create realistic seed data for:
 - 6 employees
 - 4 course categories
 - 8 courses
 - 10 course assignments
-Requirements:
+    - Requirements:
 - use extension classes for Configure SQLite connection
 
 4. Need refactor, creare base entity with field "id" and inherit from this
 5. Create auditableEntity with fields CreatedAt, UpdatedAt and include in to the inheritance
 
 6. Generate service interfaces in the TrainingTracker.Application project.
-Create:
+    - Create:
 -	IEmployeeService
 -	ICourseService
 -	ICourseCategoryService
 -	ICourseAssignmentService
 -	IDashboardService
-Requirements:
+    - Requirements:
 -	use async methods
 -	return Modelss, not entities
 
 7. please dont use " = default"
 
 8. Generate application services in the TrainingTracker.Application project.
-Create implementations for:
+    - Create implementations for:
 -	EmployeeService
 -	CourseService
 -	CourseCategoryService
 -	CourseAssignmentService
 -	DashboardService
-Requirements:
+    - Requirements:
 -	use async methods
 -	keep business logic in services
 -	include overdue detection in course assignment logic
@@ -89,13 +89,13 @@ Requirements:
 10. Create dependency injection foe application layer
 
 11. Generate ASP.NET Core Web API controllers in TrainingTracker.Api.
-Create:
+    - Create:
 - EmployeesController
 - CoursesController
 - CourseCategoriesController
 - CourseAssignmentsController
 - DashboardController
-Requirements:
+    - Requirements:
 - controllers must stay thin
 - use dependency injection
 - call Application services
@@ -107,8 +107,8 @@ Requirements:
 14. make tis field public AssignmentStatus Status { get; set; } nullable and fix usages
 15. enable CORS 
 16. Generate backend unit tests for the TrainingTracker solution.
-Focus on: Services
-Requirements: use xUnit
+    Focus on: Services
+    Requirements: use xUnit
     unit tests was generated only for EmployeService
     16.1. Generate backend unit tests for the /services from application
 
@@ -116,26 +116,26 @@ Requirements: use xUnit
     frontend
     (open in VS Code folder with 2 projects: backend and frontend)
 1. Project: Training Course Assignment Tracker
-Repository structure:
+    - Repository structure:
 - backend/TrainingTracker.sln
 - backend/src/TrainingTracker.Api
 - backend/src/TrainingTracker.Application
 - backend/src/TrainingTracker.Domain
 - backend/src/TrainingTracker.Infrastructure
 - frontend/training-tracker-ui
-Important backend context:
+    - Important backend context:
 - The backend already exists in this repository
 - Use backend/src/TrainingTracker.Application Models as the source of truth for data contracts
 - Use backend/src/TrainingTracker.Api controllers as the source of truth for API endpoints
 - Align frontend models and API services with the existing backend implementation
-Angular requirements:
+    - Angular requirements:
 - use standalone components
 - use Angular Material
 
 ************************************
 I first tried without "naming conventions", and the agent generated very bad code
 ************************************
-Angular naming conventions: 
+    - Angular naming conventions: 
 - page containers must use the suffix PageComponent
 - reusable UI components must use the suffix Component
 - layout components must use the suffix LayoutComponent
@@ -143,7 +143,7 @@ Angular naming conventions:
 - local helper services must use the suffix Service
 - do not omit the Component suffix for Angular components
 - keep class names, file names, and selectors consistent
-Use domain names consistently:
+    - Use domain names consistently:
 - Employee
 - Course
 - CourseCategory
