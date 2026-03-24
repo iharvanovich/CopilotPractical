@@ -29,13 +29,13 @@ Backend projects:
 - TrainingTracker.Application
 - TrainingTracker.Domain
 - TrainingTracker.Infrastructure
---- Create:
+### Create:
 - Employee
 - Course
 - CourseCategory
 - CourseAssignment
 - AssignmentStatus enum
---- Requirements:
+### Requirements:
 - place entities in an Entities folder
 - place AssignmentStatus in an Enums folder
 - make entities suitable for EF Core
